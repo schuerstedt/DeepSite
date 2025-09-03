@@ -12,7 +12,9 @@ export const analyzePromptComplexity = (prompt: string): {
     'dashboard', 'admin', 'complex', 'multiple sections', 'interactive',
     'animation', 'form validation', 'responsive design', 'professional',
     'business', 'enterprise', 'multi-page', 'navigation', 'sidebar',
-    'user management', 'data visualization', 'charts', 'graphs'
+    'user management', 'data visualization', 'charts', 'graphs',
+    'images', 'image', 'photos', 'pictures', 'gallery', 'visual',
+    'explainer', 'tutorial', 'guide', 'educational', 'attention'
   ];
   
   const simpleKeywords = [
@@ -56,23 +58,21 @@ export const analyzePromptComplexity = (prompt: string): {
   let reasoning: string;
   let confidence: number;
   
-  if (complexityScore <= 0 && wordCount < 15) {
+  if (complexityScore <= -1 && wordCount < 10) {
     complexity = 'simple';
     recommendedMode = 'classic';
-    reasoning = 'Simple request with basic requirements - Classic mode will be faster';
+    reasoning = 'Very simple request with basic requirements - Classic mode will be faster';
     confidence = 0.8;
-  } else if (complexityScore >= 3 || designScore >= 2 || wordCount > 40) {
+  } else if (complexityScore >= 1 || designScore >= 1 || wordCount > 20) {
     complexity = 'complex';
     recommendedMode = 'enhanced';
-    reasoning = 'Complex request with detailed requirements - Enhanced mode will provide better planning and results';
+    reasoning = 'Request with detailed requirements - Enhanced mode will provide better planning and results';
     confidence = 0.9;
   } else {
     complexity = 'moderate';
-    recommendedMode = designScore >= 1 ? 'enhanced' : 'classic';
-    reasoning = designScore >= 1 
-      ? 'Design-focused request - Enhanced mode recommended for better aesthetics'
-      : 'Moderate complexity - Classic mode should work well';
-    confidence = 0.6;
+    recommendedMode = 'enhanced'; // Default to enhanced for moderate complexity
+    reasoning = 'Moderate complexity - Enhanced mode recommended for better results';
+    confidence = 0.7;
   }
   
   return { complexity, recommendedMode, reasoning, confidence };

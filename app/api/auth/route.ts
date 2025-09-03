@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   ).toString("base64")}`;
 
   const host =
-    req.headers.get("host") ?? req.headers.get("origin") ?? "localhost:3000";
+    req.headers.get("host") ?? req.headers.get("origin") ?? "localhost:3001";
 
   const url = host.includes("/spaces/enzostvs")
     ? "enzostvs-deepsite.hf.space"

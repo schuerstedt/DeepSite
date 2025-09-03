@@ -12,8 +12,8 @@ COPY --chown=1000 . .
 RUN npm install
 RUN npm run build
 
-# Expose the application port (assuming your app runs on port 3000)
-EXPOSE 3000
+# Expose the application port (assuming your app runs on port 3001)
+EXPOSE 3001
 
 # Start the application
 CMD ["npm", "start"]

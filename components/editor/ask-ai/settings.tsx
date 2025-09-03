@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { getAnalyticsSummary } from "@/lib/prompt-analytics";
 import { useTokenTracking } from "@/hooks/useTokenTracking";
+import { useTextModel } from "@/hooks/useTextModel";
 
 export function Settings({
   open,
@@ -32,9 +33,11 @@ export function Settings({
   error,
   isFollowUp = false,
   promptMode,
+  sectionMode,
   onChange,
   onModelChange,
   onPromptModeChange,
+  onSectionModeChange,
 }: {
   open: boolean;
   provider: string;
@@ -42,14 +45,17 @@ export function Settings({
   error?: string;
   isFollowUp?: boolean;
   promptMode?: 'classic' | 'enhanced';
+  sectionMode?: boolean;
   onClose: React.Dispatch<React.SetStateAction<boolean>>;
   onChange: (provider: string) => void;
   onModelChange: (model: string) => void;
   onPromptModeChange?: (mode: 'classic' | 'enhanced') => void;
+  onSectionModeChange?: (enabled: boolean) => void;
 }) {
   const analytics = useMemo(() => getAnalyticsSummary(), [open]);
   const { getTokenUsageSummary } = useTokenTracking();
   const tokenUsage = useMemo(() => getTokenUsageSummary(), [open]);
+  const { selectedModel: textModel, availableModels: textModels, loading: textModelsLoading, changeModel: changeTextModel } = useTextModel();
   
   const modelAvailableProviders = useMemo(() => {
     const availableProviders = MODELS.find(
@@ -178,6 +184,37 @@ export function Settings({
               </Select>
             </label>
             
+            {/* Text Generation Model Selector */}
+            <label className="block">
+              <p className="text-neutral-300 text-sm mb-2.5">
+                Text Generation Model
+              </p>
+              <p className="text-xs text-neutral-400/70 mb-2">
+                Choose the AI model for dynamic content generation (pollinations.ai)
+              </p>
+              {textModelsLoading ? (
+                <div className="w-full bg-neutral-800 rounded-md px-3 py-2 text-sm text-neutral-400">
+                  Loading models...
+                </div>
+              ) : (
+                <Select value={textModel} onValueChange={changeTextModel}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a text model" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Available text models</SelectLabel>
+                      {textModels.map(({ value, label }) => (
+                        <SelectItem key={value} value={value}>
+                          {label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            </label>
+            
             {/* Prompt Mode Toggle */}
             {!isFollowUp && onPromptModeChange && (
               <div className="flex flex-col gap-3">
@@ -215,6 +252,49 @@ export function Settings({
                       )}
                     >
                       Enhanced
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Section Mode Toggle */}
+            {!isFollowUp && onSectionModeChange && (
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-neutral-300 text-sm mb-1.5">
+                      Section Structure
+                    </p>
+                    <p className="text-xs text-neutral-400/70">
+                      {sectionMode 
+                        ? 'Generate single-page websites with organized sections'
+                        : 'Generate websites without enforced section structure'
+                      }
+                    </p>
+                  </div>
+                  <div className="flex gap-1 bg-neutral-800 rounded-md p-1">
+                    <button
+                      onClick={() => onSectionModeChange(false)}
+                      className={classNames(
+                        'px-3 py-1.5 text-xs rounded transition-all duration-200',
+                        !sectionMode 
+                          ? 'bg-neutral-600 text-white' 
+                          : 'text-neutral-400 hover:text-neutral-300'
+                      )}
+                    >
+                      Free
+                    </button>
+                    <button
+                      onClick={() => onSectionModeChange(true)}
+                      className={classNames(
+                        'px-3 py-1.5 text-xs rounded transition-all duration-200',
+                        sectionMode 
+                          ? 'bg-green-500 text-white' 
+                          : 'text-neutral-400 hover:text-neutral-300'
+                      )}
+                    >
+                      Sections
                     </button>
                   </div>
                 </div>

@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
   const userToken = request.cookies.get(MY_TOKEN_KEY())?.value;
 
   const body = await request.json();
-  const { prompt, provider, model, redesignMarkdown, html, promptMode = 'classic' } = body;
+  const { prompt, provider, model, redesignMarkdown, html, promptMode = 'classic', sectionMode = true } = body;
 
   if (!model || (!prompt && !redesignMarkdown)) {
     return NextResponse.json(
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
             messages: [
               {
                 role: "system",
-                content: getSystemPrompt(promptMode as 'classic' | 'enhanced'),
+                content: getSystemPrompt(promptMode as 'classic' | 'enhanced', sectionMode as boolean),
               },
               {
                 role: "user",

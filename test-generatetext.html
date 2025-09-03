@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test GenerateText System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/generatetext.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Testing GenerateText System</h1>
+        
+        <!-- Test 1: Short content -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-600">Test 1: Basic Content Generation</h2>
+            <div data-generatetext="Create a brief introduction to web development with 3 key benefits" 
+                 data-system="Return properly formatted HTML with h3 heading, paragraph descriptions, and bullet points using ul/li tags. Include Tailwind CSS classes for styling.">
+                Loading basic content...
+            </div>
+        </section>
+
+        <!-- Test 2: Complex content like the user's example -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-green-600">Test 2: Complex Content (Like User's Example)</h2>
+            <div data-generatetext="Comprehensive guide to negotiation preparation and planning covering 500+ words: importance of preparation, setting objectives, researching counterparts, understanding BATNA, identifying interests vs positions, developing strategies, anticipating objections, and creating fallback plans. Include practical examples and step-by-step approaches." 
+                 data-system="Create detailed, educational content about negotiation preparation with practical advice and examples. Return properly formatted HTML with h2/h3 headings, paragraph tags (p), lists (ul/li), and proper structure. Use Tailwind CSS classes for styling.">
+                Loading negotiation preparation content...
+            </div>
+        </section>
+
+        <!-- Test 3: Another complex content -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-purple-600">Test 3: Rapport Building Content</h2>
+            <div data-generatetext="Comprehensive guide to building rapport and trust in negotiations covering 500+ words: importance of relationship building, techniques for establishing connection, active listening skills, finding common ground, demonstrating empathy, cultural considerations, nonverbal communication, and maintaining professionalism while building trust. Include practical examples and communication techniques." 
+                 data-system="Create detailed, educational content about building rapport in negotiations with practical advice and examples. Return properly formatted HTML with h2/h3 headings, paragraph tags (p), lists (ul/li), and clear structure. Use Tailwind CSS classes for styling.">
+                Loading rapport building content...
+            </div>
+        </section>
+
+        <!-- Test 4: Team profiles -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-red-600">Test 4: Team Profiles</h2>
+            <div data-generatetext="Generate 3 team member profiles: CEO, CTO, Marketing Director with detailed bios and expertise" 
+                 data-system="Return HTML grid with h3 for names, h4 for roles, p tags for detailed bios. Use proper HTML structure with Tailwind classes including grid layout and cards.">
+                Loading team profiles...
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Add some debug logging
+        console.log('Page loaded, generatetext.js should auto-load content');
+        
+        // Show a status indicator
+        setTimeout(() => {
+            const loadingElements = document.querySelectorAll('[data-generatetext]');
+            loadingElements.forEach((el, index) => {
+                if (el.innerHTML.includes('Loading')) {
+                    console.log(`Element ${index + 1} still loading:`, el.getAttribute('data-generatetext').substring(0, 50) + '...');
+                }
+            });
+        }, 5000);
+    </script>
+</body>
+</html>

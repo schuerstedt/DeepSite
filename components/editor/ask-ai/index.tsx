@@ -66,7 +66,8 @@ export function AskAI({
   const [previousPrompt, setPreviousPrompt] = useState("");
   const [provider, setProvider] = useLocalStorage("provider", "auto");
   const [model, setModel] = useLocalStorage("model", MODELS[0].value);
-  const [promptMode, setPromptMode] = useLocalStorage<'classic' | 'enhanced'>("promptMode", "classic");
+  const [promptMode, setPromptMode] = useLocalStorage<'classic' | 'enhanced'>("promptMode_v2", "enhanced");
+  const [sectionMode, setSectionMode] = useLocalStorage("sectionMode", true);
   const [openProvider, setOpenProvider] = useState(false);
   const [providerError, setProviderError] = useState("");
   const [openProModal, setOpenProModal] = useState(false);
@@ -74,7 +75,7 @@ export function AskAI({
   const [openThink, setOpenThink] = useState(false);
   const [isThinking, setIsThinking] = useState(true);
   const [controller, setController] = useState<AbortController | null>(null);
-  const [isFollowUp, setIsFollowUp] = useState(true);
+  const [isFollowUp, setIsFollowUp] = useState(false);
   const [recommendation, setRecommendation] = useState<ReturnType<typeof getPromptRecommendation>>(null);
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [selectedStyle, setSelectedStyle] = useLocalStorage("designStyle", "default");
@@ -88,17 +89,17 @@ export function AskAI({
     return MODELS.find((m: { value: string }) => m.value === model);
   }, [model]);
 
-  // Analyze prompt and provide recommendations
-  useEffect(() => {
-    if (prompt.trim().length > 10) {
-      const rec = getPromptRecommendation(prompt);
-      setRecommendation(rec);
-      setShowRecommendation(!!rec && rec.recommendedMode !== promptMode);
-    } else {
-      setRecommendation(null);
-      setShowRecommendation(false);
-    }
-  }, [prompt, promptMode]);
+  // Analyze prompt and provide recommendations - DISABLED to prevent auto-switching
+  // useEffect(() => {
+  //   if (prompt.trim().length > 10) {
+  //     const rec = getPromptRecommendation(prompt);
+  //     setRecommendation(rec);
+  //     setShowRecommendation(!!rec && rec.recommendedMode !== promptMode);
+  //   } else {
+  //     setRecommendation(null);
+  //     setShowRecommendation(false);
+  //   }
+  // }, [prompt, promptMode]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -236,6 +237,7 @@ export function AskAI({
             html: isSameHtml ? "" : html,
             redesignMarkdown,
             promptMode,
+            sectionMode,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -577,7 +579,7 @@ export function AskAI({
                 ? `Ask DeepSite about ${selectedElement.tagName.toLowerCase()}... (Shift+Enter for new line)`
                 : hasAsked
                 ? "Ask DeepSite for edits (Shift+Enter for new line)"
-                : "Ask DeepSite anything... (Shift+Enter for new line)"
+                : "Describe your website idea... (Example: 'Create a modern portfolio for a web developer') (Shift+Enter for new line)"
             }
             value={prompt}
             onChange={(e) => {
@@ -703,6 +705,7 @@ export function AskAI({
                   })}
                 >
                   {promptMode === 'enhanced' ? '✨ Enhanced' : '⚡ Classic'}
+                  {sectionMode && <span className="ml-1 text-green-400">📋</span>}
                 </Button>
               </TooltipTrigger>
               <TooltipContent
@@ -713,6 +716,7 @@ export function AskAI({
                   ? 'Enhanced mode: AI plans before implementing for better results'
                   : 'Classic mode: Direct generation for faster results'
                 }
+                {sectionMode && <><br />📋 Section-based structure enabled</>}
               </TooltipContent>
             </Tooltip>
             
@@ -720,9 +724,11 @@ export function AskAI({
               provider={provider as string}
               model={model as string}
               promptMode={promptMode}
+              sectionMode={sectionMode}
               onChange={setProvider}
               onModelChange={setModel}
               onPromptModeChange={setPromptMode}
+              onSectionModeChange={setSectionMode}
               open={openProvider}
               error={providerError}
               isFollowUp={!isSameHtml && isFollowUp}

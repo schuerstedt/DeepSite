@@ -4,7 +4,7 @@
   "description": "AI-powered website generator with advanced export capabilities, multiline input, and professional UX. Transform natural language into responsive websites using multiple LLM providers.",
   "keywords": [
     "ai",
-    "website-generator", 
+    "website-generator",
     "llm",
     "nextjs",
     "typescript",
@@ -16,9 +16,9 @@
   ],
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {
@@ -43,6 +43,7 @@
     "@tanstack/react-query-devtools": "^5.80.6",
     "@types/html2canvas": "^0.5.35",
     "@types/jspdf": "^1.3.3",
+    "@types/jszip": "^3.4.0",
     "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
@@ -51,6 +52,7 @@
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.3",
     "jspdf": "^3.0.1",
+    "jszip": "^3.10.1",
     "lucide-react": "^0.513.0",
     "monaco-editor": "^0.52.2",
     "mongoose": "^8.15.1",

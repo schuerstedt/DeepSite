@@ -27,6 +27,7 @@ import { SaveButton } from "./save-button";
 import { LoadProject } from "../my-projects/load-project";
 import { isTheSameHtml } from "@/lib/compare-html-diff";
 import { downloadHtmlFile, downloadAsFullPageImage, downloadAsPdf } from "@/lib/download-utils";
+import DownloadGeneratedContent from "./download-generated-content";
 
 export const AppEditor = ({ project }: { project?: Project | null }) => {
   const [htmlStorage, , removeHtmlStorage] = useLocalStorage("html_content");
@@ -253,7 +254,12 @@ export const AppEditor = ({ project }: { project?: Project | null }) => {
               className="bg-neutral-900 relative flex-1 overflow-hidden h-full flex flex-col gap-2 pb-3"
             >
               {/* Action buttons group */}
-              <div className="absolute top-2 right-5 z-10 flex items-center gap-2">
+              <div className="absolute top-2 right-5 z-10 flex items-center gap-3">
+                <DownloadGeneratedContent 
+                  htmlContent={html} 
+                  filename="generated-website"
+                />
+                <div className="w-px h-6 bg-neutral-600"></div>
                 <CopyIcon
                   className="size-4 text-neutral-500 hover:text-neutral-300 cursor-pointer transition-colors"
                   onClick={() => {

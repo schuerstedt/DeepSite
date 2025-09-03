@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test GenerateText System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/generatetext.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Testing GenerateText System</h1>
+        
+        <!-- Model Selector -->
+        <div id="model-selector-container"></div>
+        
+        <!-- Status Bar -->
+        <div id="status" class="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <h2 class="text-lg font-semibold text-blue-800 mb-2">Loading Status</h2>
+            <p class="text-blue-600">Initializing content generation...</p>
+        </div>
+        
+        <!-- Test 1: Short content -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-600">Test 1: Basic Content Generation (Default System)</h2>
+            <div data-generatetext="Create a brief introduction to web development with 3 key benefits and modern technologies">
+                <div class="animate-pulse bg-blue-50 p-4 rounded">Loading basic content...</div>
+            </div>
+        </section>
+
+        <!-- Test 2: Complex content like the user's example -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-green-600">Test 2: Complex Content (Consistent Default)</h2>
+            <div data-generatetext="Explain the importance of preparation in negotiation, covering research techniques, understanding your BATNA (Best Alternative To a Negotiated Agreement), identifying interests vs positions, setting targets and walk-away points, and analyzing the other party's potential needs and constraints. Provide detailed examples of effective preparation strategies.">
+                <div class="animate-pulse bg-green-50 p-4 rounded">Loading negotiation preparation content...</div>
+            </div>
+        </section>
+
+        <!-- Test 3: Another complex content -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-purple-600">Test 3: Follow-up Content (Same Default)</h2>
+            <div data-generatetext="Continue with advanced preparation techniques: creating negotiation checklists, developing multiple scenarios, anticipating objections, practicing with role-playing, gathering intelligence ethically, and establishing criteria for evaluation. Include case studies showing how preparation led to successful outcomes.">
+                <div class="animate-pulse bg-purple-50 p-4 rounded">Loading advanced techniques...</div>
+            </div>
+        </section>
+
+        <!-- Test 4: Team profiles -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-red-600">Test 4: Team Profiles (Default System)</h2>
+            <div data-generatetext="Generate 3 team member profiles: CEO Sarah Johnson (10 years experience in tech startups), CTO Michael Chen (expert in cloud architecture), Marketing Director Emma Williams (digital marketing specialist). Include detailed professional backgrounds, achievements, and expertise areas.">
+                <div class="animate-pulse bg-red-50 p-4 rounded">Loading team profiles...</div>
+            </div>
+        </section>
+
+        <!-- Test 5: Services section -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-600">Test 5: Services Description (Default System)</h2>
+            <div data-generatetext="Create detailed description of web development services including custom website development, e-commerce solutions, mobile app development, and digital marketing. Include pricing tiers, process overview, and key benefits for each service.">
+                <div class="animate-pulse bg-indigo-50 p-4 rounded">Loading services content...</div>
+            </div>
+        </section>
+
+        <!-- Test 6: Dynamic Image Generation -->
+        <section class="mb-12 bg-gradient-to-br from-pink-50 to-orange-50 p-6 rounded-lg shadow border-2 border-pink-200">
+            <h2 class="text-2xl font-semibold mb-4 text-pink-700">🎨 Test 6: Dynamic Image Generation</h2>
+            <p class="text-gray-600 mb-4">Testing pollinations.ai image generation with dynamic content:</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3 text-pink-600">Generated Hero Image</h3>
+                    <img 
+                        src="https://image.pollinations.ai/prompt/Modern%20web%20development%20workspace%20with%20multiple%20monitors,%20clean%20desk,%20coding%20on%20screen,%20minimalist%20style,%20professional%20lighting,%20tech%20startup%20atmosphere?width=400&height=250&model=flux&enhance=true&aspect=16:10" 
+                        alt="Modern web development workspace"
+                        width="400"
+                        height="250"
+                        class="w-full h-auto rounded-lg shadow-md border border-pink-200"
+                        style="object-fit: cover; aspect-ratio: 400/250;"
+                        loading="lazy"
+                    />
+                    <p class="text-sm text-gray-500 mt-2">Dynamic workspace image</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3 text-orange-600">Generated Team Photo</h3>
+                    <img 
+                        src="https://image.pollinations.ai/prompt/Professional%20diverse%20tech%20team%20meeting,%20modern%20office,%20collaborative%20discussion,%20business%20casual,%20natural%20lighting,%20realistic%20photography?width=400&height=250&model=flux&enhance=true&aspect=16:10" 
+                        alt="Professional tech team meeting"
+                        width="400"
+                        height="250"
+                        class="w-full h-auto rounded-lg shadow-md border border-orange-200"
+                        style="object-fit: cover; aspect-ratio: 400/250;"
+                        loading="lazy"
+                    />
+                    <p class="text-sm text-gray-500 mt-2">Dynamic team image</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-white rounded-lg border border-pink-100">
+                <h4 class="font-semibold text-pink-700 mb-2">🔄 Real-time Image Generation</h4>
+                <p class="text-gray-600 text-sm mb-3">These images are generated on-demand from pollinations.ai using descriptive prompts. Each reload may show different variations.</p>
+                <button 
+                    onclick="reloadImages()" 
+                    class="bg-pink-600 hover:bg-pink-700 text-white px-3 py-1 rounded text-sm transition-colors">
+                    🎲 Generate New Images
+                </button>
+            </div>
+        </section>
+
+        <!-- Download Test Section -->
+        <section class="mb-12 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-lg shadow border-2 border-indigo-200">
+            <h2 class="text-2xl font-semibold mb-4 text-indigo-700">🎯 Download Test Section</h2>
+            <p class="text-gray-600 mb-4">Once all content has loaded, you can test the download functionality:</p>
+            
+            <div class="flex gap-4 mb-4">
+                <button 
+                    id="downloadHtml" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                    onclick="downloadAsHTML()">
+                    📄 Download HTML
+                </button>
+                <button 
+                    id="downloadZip" 
+                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                    onclick="downloadAsZip()">
+                    📦 Download ZIP (with images)
+                </button>
+            </div>
+            
+            <div id="downloadStatus" class="text-sm text-gray-600"></div>
+        </section>
+        <section class="mb-12 bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-yellow-600">Test 7: FAQ Section (Default System)</h2>
+            <div data-generatetext="Generate 6 frequently asked questions about web development services covering topics like project timeline, costs, maintenance, hosting, custom features, and ongoing support. Provide detailed, helpful answers for each question.">
+                <div class="animate-pulse bg-yellow-50 p-4 rounded">Loading FAQ content...</div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Enhanced status tracking
+        let totalElements = 0;
+        let loadedElements = 0;
+        
+        function updateStatus() {
+            const statusDiv = document.getElementById('status');
+            const loadingElements = document.querySelectorAll('[data-generatetext]');
+            totalElements = loadingElements.length;
+            
+            // Count how many are still loading
+            let stillLoading = 0;
+            loadingElements.forEach((el) => {
+                if (el.innerHTML.includes('Loading') || el.innerHTML.includes('animate-pulse')) {
+                    stillLoading++;
+                }
+            });
+            
+            loadedElements = totalElements - stillLoading;
+            
+            if (loadedElements === totalElements) {
+                statusDiv.innerHTML = `
+                    <h2 class="text-lg font-semibold text-green-800 mb-2">✅ All Content Loaded!</h2>
+                    <p class="text-green-600">Successfully generated ${totalElements} content sections. Ready for download!</p>
+                `;
+                statusDiv.className = 'mb-8 p-4 bg-green-50 border border-green-200 rounded-lg';
+                
+                // Enable download buttons
+                document.getElementById('downloadHtml').disabled = false;
+                document.getElementById('downloadZip').disabled = false;
+            } else {
+                statusDiv.innerHTML = `
+                    <h2 class="text-lg font-semibold text-blue-800 mb-2">🔄 Loading Progress</h2>
+                    <p class="text-blue-600">Loaded ${loadedElements} of ${totalElements} sections. ${stillLoading} still generating...</p>
+                    <div class="mt-2 bg-blue-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: ${(loadedElements/totalElements)*100}%"></div>
+                    </div>
+                `;
+                
+                // Disable download buttons until complete
+                document.getElementById('downloadHtml').disabled = true;
+                document.getElementById('downloadZip').disabled = true;
+            }
+        }
+        
+        // Download functions
+        function captureGeneratedContent() {
+            const docClone = document.documentElement.cloneNode(true);
+            
+            // Remove the generatetext.js script
+            const scripts = docClone.querySelectorAll('script[src="/generatetext.js"]');
+            scripts.forEach(script => script.remove());
+            
+            // Remove download section
+            const downloadSection = docClone.querySelector('[class*="indigo-50"]');
+            if (downloadSection) downloadSection.remove();
+            
+            // Remove data attributes
+            const elementsWithData = docClone.querySelectorAll('[data-generatetext]');
+            elementsWithData.forEach(element => {
+                element.removeAttribute('data-generatetext');
+                element.removeAttribute('data-system');
+            });
+            
+            // Remove loading states
+            const loadingElements = docClone.querySelectorAll('.animate-pulse');
+            loadingElements.forEach(element => {
+                element.classList.remove('animate-pulse');
+            });
+            
+            return `<!DOCTYPE html>\n${docClone.outerHTML}`;
+        }
+        
+        function downloadAsHTML() {
+            const statusDiv = document.getElementById('downloadStatus');
+            statusDiv.innerHTML = '📄 Preparing HTML download...';
+            
+            try {
+                const content = captureGeneratedContent();
+                const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'test-generated-content.html';
+                link.style.display = 'none';
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                URL.revokeObjectURL(url);
+                statusDiv.innerHTML = '✅ HTML downloaded successfully!';
+            } catch (error) {
+                console.error('Download failed:', error);
+                statusDiv.innerHTML = '❌ Download failed. Check console for details.';
+            }
+        }
+        
+        async function downloadAsZip() {
+            const statusDiv = document.getElementById('downloadStatus');
+            statusDiv.innerHTML = '📦 Creating ZIP package...';
+            
+            try {
+                // Import JSZip
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+                document.head.appendChild(script);
+                
+                await new Promise(resolve => script.onload = resolve);
+                
+                const zip = new JSZip();
+                const content = captureGeneratedContent();
+                
+                // Extract image URLs
+                const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+                const imageUrls = [];
+                let match;
+                while ((match = imgRegex.exec(content)) !== null) {
+                    imageUrls.push(match[1]);
+                }
+                
+                statusDiv.innerHTML = `📦 Downloading ${imageUrls.length} images...`;
+                
+                // Download images and update HTML
+                let updatedHtml = content;
+                const imagePromises = imageUrls.map(async (url, index) => {
+                    try {
+                        console.log(`Downloading image ${index + 1}: ${url}`);
+                        const response = await fetch(url, {
+                            method: 'GET',
+                            mode: 'cors'
+                        });
+                        if (response.ok) {
+                            const blob = await response.blob();
+                            console.log(`Image ${index + 1} blob type: ${blob.type}, size: ${blob.size}`);
+                            
+                            // Since pollinations.ai returns correctly sized images, use original blob
+                            // to avoid any distortion from canvas processing
+                            const filename = `images/image-${index + 1}.jpg`;
+                            zip.file(filename, blob);
+                            updatedHtml = updatedHtml.replace(url, filename);
+                            console.log(`Successfully saved original image ${index + 1} as ${filename}`);
+                            return true;
+                        } else {
+                            console.error(`Failed to fetch image ${index + 1}: ${response.status} ${response.statusText}`);
+                            return false;
+                        }
+                    } catch (error) {
+                        console.warn(`Failed to download image: ${url}`, error);
+                        return false;
+                    }
+                });
+                
+                await Promise.all(imagePromises);
+                
+                // Add HTML file
+                zip.file('test-generated-content.html', updatedHtml);
+                
+                // Add README
+                const readme = `# Generated Content Test Package
+
+This package contains the test content generated by the DeepSite generatetext system.
+
+## Contents:
+- test-generated-content.html - The main HTML file with generated content
+- images/ - All images used in the website
+
+## Generated Content Includes:
+- Basic web development introduction
+- Comprehensive negotiation preparation guide  
+- Rapport building content
+- Team member profiles
+- Services descriptions
+- FAQ section
+
+Generated on: ${new Date().toLocaleString()}
+`;
+                
+                zip.file('README.md', readme);
+                
+                statusDiv.innerHTML = '📦 Generating ZIP file...';
+                
+                // Generate and download ZIP
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                const url = URL.createObjectURL(zipBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'test-generated-content.zip';
+                link.style.display = 'none';
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                URL.revokeObjectURL(url);
+                statusDiv.innerHTML = '✅ ZIP package downloaded successfully!';
+                
+            } catch (error) {
+                console.error('ZIP creation failed:', error);
+                statusDiv.innerHTML = '❌ ZIP creation failed. Check console for details.';
+            }
+        }
+        
+        // Function to reload images with new random variations
+        function reloadImages() {
+            const images = document.querySelectorAll('#Test\\ 6\\:' + ' img, section:has(h2:contains("Test 6")) img');
+            const button = event.target;
+            
+            // Update button state
+            button.disabled = true;
+            button.innerHTML = '🔄 Generating...';
+            button.classList.add('opacity-50');
+            
+            // Get current timestamp to force new generation
+            const timestamp = Date.now();
+            
+            // Update images with new random variations
+            const imageContainer = button.closest('section');
+            const imgs = imageContainer.querySelectorAll('img');
+            
+            imgs.forEach((img, index) => {
+                const prompt = index === 0 
+                    ? 'Modern%20web%20development%20workspace%20with%20multiple%20monitors,%20clean%20desk,%20coding%20on%20screen,%20minimalist%20style,%20professional%20lighting,%20tech%20startup%20atmosphere'
+                    : 'Professional%20diverse%20tech%20team%20meeting,%20modern%20office,%20collaborative%20discussion,%20business%20casual,%20natural%20lighting,%20realistic%20photography';
+                
+                // Build correct pollinations.ai URL format
+                const newSrc = `https://image.pollinations.ai/prompt/${prompt}?width=400&height=250&model=flux&enhance=true&aspect=16:10&seed=${timestamp + index}`;
+                
+                // Add loading state
+                img.style.opacity = '0.5';
+                img.style.filter = 'blur(2px)';
+                
+                img.onload = () => {
+                    img.style.opacity = '1';
+                    img.style.filter = 'none';
+                };
+                
+                img.src = newSrc;
+            });
+            
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                button.disabled = false;
+                button.innerHTML = '🎲 Generate New Images';
+                button.classList.remove('opacity-50');
+            }, 3000);
+        }
+        
+        // Update status every 2 seconds
+        setInterval(updateStatus, 2000);
+        
+        // Initial status update
+        setTimeout(updateStatus, 1000);
+        
+        // Debug logging
+        console.log('Test page loaded, generatetext.js should auto-load content');
+        console.log('Check browser network tab to see API calls to pollinations.ai');
+        
+        // Additional debugging after 10 seconds
+        setTimeout(() => {
+            console.log('=== 10 Second Status Check ===');
+            const loadingElements = document.querySelectorAll('[data-generatetext]');
+            loadingElements.forEach((el, index) => {
+                const prompt = el.getAttribute('data-generatetext').substring(0, 50) + '...';
+                const isLoaded = !el.innerHTML.includes('Loading') && !el.innerHTML.includes('animate-pulse');
+                console.log(`${index + 1}. ${isLoaded ? '✅' : '⏳'} ${prompt}`);
+                
+                if (!isLoaded) {
+                    console.log(`   Still loading: ${el.innerHTML.substring(0, 100)}...`);
+                }
+            });
+        }, 10000);
+    </script>
+</body>
+</html>
