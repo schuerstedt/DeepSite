@@ -1,157 +1,291 @@
-# 🚀 DeepSite User Guide
+# 🚀 DeepSite v2 - Complete User Guide
 
-## Welcome to DeepSite!
+## Welcome to DeepSite v2!
 
-DeepSite is your AI-powered website creation platform that transforms ideas into professional, interactive websites in seconds.
+**The Professional AI Website Creation Platform**
+
+DeepSite v2 transforms your ideas into sophisticated, interactive websites with professional design systems, dynamic content generation, and comprehensive interactive components. This is your complete guide to mastering the platform.
 
 ## 🎯 Getting Started
 
-### 1. **Start with a Clear Idea**
-Think about what kind of website you want to create:
-- Business website
-- Portfolio
-- E-commerce store
-- Landing page
-- Blog or content site
+### **Understanding DeepSite v2's Power**
 
-### 2. **Use Descriptive Prompts**
-The more specific you are, the better results you'll get:
+DeepSite v2 uses a **three-layer generation system**:
+1. **System Prompts**: Strategic planning with comprehensive design guidelines
+2. **Dynamic Images**: Context-aware visual content from pollinations.ai
+3. **Progressive Text**: GenerateText.js for automatic content loading
 
-**Good Examples:**
-- "Create a modern portfolio website for a web developer with projects, skills, and contact section"
-- "Build a restaurant website with menu, location, hours, and online reservation system"
-- "Design a SaaS landing page with features, pricing tiers, testimonials, and sign-up form"
+### **Quick Start Process**
 
-**Less Effective:**
-- "Make a website"
-- "Create something cool"
-- "Build a page"
+1. **Choose Your Generation Mode**:
+   - **Enhanced Mode**: Strategic planning for professional websites
+   - **Classic Mode**: Fast generation with rich content
 
-### 3. **Leverage Built-in Features**
+2. **Write a Descriptive Prompt**:
+   - Be specific about your industry and requirements
+   - Mention desired sections and interactive elements
+   - Request substantial content (300-500 words per section)
 
-#### **Style Guidelines**
-Every website automatically uses professional design patterns:
-- Consistent typography and spacing
-- Professional color schemes
-- Responsive layouts for all devices
-- Modern hover effects and animations
+3. **Let AI Create Magic**:
+   - Watch real-time generation with AI thinking process
+   - Automatic interactive component generation
+   - Dynamic content loading with visual elements
+
+## 💡 Prompt Writing Mastery
+
+### **Enhanced Mode Prompts (Recommended)**
+
+**Professional Business Sites:**
+```
+"Create a comprehensive consulting firm website with strategic planning approach. Include services overview with detailed descriptions, expert team profiles, client success stories, case studies, and contact information. Use interactive tabs for services and accordion for FAQ section."
+```
+
+**Creative Portfolios:**
+```
+"Design a professional photographer portfolio with strategic content structure. Include portfolio gallery with tabs for different photography styles, detailed service packages, creative process explanation, client testimonials, and booking system integration."
+```
+
+**E-commerce Experiences:**
+```
+"Build a sophisticated online boutique with professional e-commerce structure. Include product galleries with interactive tabs, detailed product specifications, customer review sections, shopping experience features, and brand story."
+```
+
+### **Classic Mode Prompts**
+
+**Quick Business Sites:**
+```
+"Create a modern marketing agency website with comprehensive service descriptions, team showcase, client portfolio, testimonials, and detailed contact information with location and business hours."
+```
+
+### **Pro Tips for Better Results**
+
+#### **🎯 Be Industry-Specific**
+- "Dental practice website with appointment booking"
+- "SaaS platform landing page with feature breakdown"
+- "Wedding photography portfolio with gallery sections"
+
+#### **🔧 Request Interactive Elements**
+- "Use tabs for organizing service categories"
+- "Include accordion sections for FAQ"
+- "Add modal popups for detailed portfolio items"
+
+#### **📝 Ask for Substantial Content**
+- "Include detailed descriptions for each service"
+- "Provide comprehensive team member profiles"
+- "Create substantial content sections with real value"
+
+## 🎨 Understanding the Design System
+
+### **Automatic Design Excellence**
+
+Every website includes:
+
+#### **Professional Layout Patterns**
+- **Container Systems**: Proper spacing and max-width containers
+- **Section Structure**: Background variations with subtle borders
+- **Typography Hierarchy**: Semantic heading structure with consistent sizing
+- **Color System**: Professional gradients and semantic color usage
 
 #### **Interactive Components**
-Your websites include rich interactive elements:
-- **Tab Systems**: Organize content into switchable sections
-- **Accordion Sections**: Expandable FAQ or feature lists
-- **Modal Dialogs**: Detailed popups for additional information
-- **Progressive Loading**: Content that loads in stages for better engagement
+- **Tab Systems**: Multi-section content organization
+- **Accordion Sections**: Expandable content areas
+- **Modal Dialogs**: Detailed content overlays
+- **Progressive Loading**: Staged content revelation
+- **Card Interactions**: Enhanced hover effects
 
-#### **Smart Content Generation**
-- Substantial content is automatically generated for all sections
-- Content mixing: text + images + interactive elements
-- Visual breaks with relevant images
-- Consistent styling across all content
+#### **Content Integration**
+- **GenerateText Sections**: Dynamic content loading
+- **Strategic Images**: Context-aware visual content
+- **Visual Breaks**: Proper content pacing
+- **Consistent Styling**: Unified design language
 
-## 💡 Pro Tips
+## 🔧 Advanced Features & Tools
 
-### **Be Specific About Sections**
-"Create a consulting website with sections: Home, Services, About Us, Team, Case Studies, Contact"
+### **Intelligent Content Structure**
 
-### **Mention Your Industry**
-"Build a dental practice website with appointment booking, services, staff bios, and patient testimonials"
+The AI automatically:
+- **Analyzes Content**: Determines optimal layout patterns
+- **Selects Components**: Chooses tabs vs accordions vs cards
+- **Places Images**: Strategic visual content breaks
+- **Loads Content**: Progressive enhancement with GenerateText.js
 
-### **Request Interactive Features**
-"Design a portfolio with an interactive project gallery, tabbed skills section, and contact form"
+### **Professional Interface Tools**
 
-### **Ask for Specific Content Types**
-"Create a marketing agency site with client testimonials, case study details, service explanations, and team member profiles"
+#### **Monaco Editor**
+- Full VS Code editing experience
+- Syntax highlighting and error detection
+- Code folding and search functionality
+- Professional development environment
 
-## 🎨 Design Capabilities
+#### **Element Selection**
+- Click any preview element for targeted editing
+- Precise modifications without affecting other content
+- Context-aware editing suggestions
 
-### **Professional Styling**
-- Gradient backgrounds and modern layouts
-- Card-based designs with subtle shadows
-- Professional typography hierarchy
-- Consistent spacing and alignment
+#### **Device Preview**
+- Test across desktop, tablet, and mobile
+- Responsive design validation
+- Real-time preview updates
 
-### **Interactive Elements**
-- Smooth hover animations
-- Clickable cards and buttons
-- Expandable sections
-- Modal overlays
+### **Export & Download System**
 
-### **Responsive Design**
-- Mobile-first approach
-- Tablet and desktop optimizations
-- Flexible grid systems
-- Adaptive typography
+#### **Multiple Professional Formats**
+- **HTML Export**: Clean, production-ready code
+- **PNG Screenshots**: High-quality image captures
+- **Advanced PDF**: 3-tier fallback system with styling preservation
+- **ZIP Downloads**: Complete website packages with assets
 
-## 🔧 Advanced Features
+#### **Production-Ready Output**
+- Optimized code structure
+- All interactive features preserved
+- Professional commenting and organization
+- Ready for deployment
 
-### **Editing and Refinement**
-- Ask for specific changes: "Make the header bigger and change the color scheme to blue"
-- Request new sections: "Add a testimonials section with customer quotes"
-- Modify content: "Update the about section to focus more on our team's experience"
+## 📚 Built-in Documentation System
 
-### **Export Options**
-- **HTML Download**: Get clean, production-ready code
-- **Image Export**: Generate high-quality screenshots
-- **PDF Export**: Create presentation-ready documents
+### **Interactive Start Page**
+When you first open DeepSite v2:
+- **Expandable sections** with comprehensive feature explanations
+- **Quick-start examples** organized by category
+- **Copy-to-clipboard** functionality for instant prompt use
+- **Training-focused approach** for optimal learning
 
-### **Model Selection**
-- Choose from multiple AI models in settings
-- Different models excel at different types of content
-- Experiment to find what works best for your needs
+### **Example Categories**
+- **Business & Professional**: Consulting, agencies, services
+- **Creative & Portfolio**: Photography, design, art
+- **E-commerce & Retail**: Online stores, product showcases
+- **Technology & SaaS**: Software platforms, tech companies
 
-## 📋 Common Website Types & Prompts
+## 🔄 Editing & Refinement
 
-### **Business Websites**
-```
-"Create a professional [industry] website with services overview, company story, team profiles, client testimonials, and contact information with location and hours"
-```
+### **Follow-up Editing System**
 
-### **Portfolios**
-```
-"Design a [profession] portfolio with project showcase, skills and expertise, professional bio, work process explanation, and contact form"
-```
+After initial generation, use follow-up prompts for refinement:
 
-### **E-commerce**
-```
-"Build an online store for [product type] with product galleries, detailed descriptions, customer reviews, shopping features, and company information"
-```
+**Content Modifications:**
+- "Add a testimonials section with specific client results"
+- "Update the services section to include pricing information"
+- "Expand the about section with company history details"
 
-### **Service Providers**
-```
-"Create a [service] business website with service descriptions, pricing packages, booking system, customer testimonials, and location details"
-```
+**Design Adjustments:**
+- "Make the header more prominent with larger text"
+- "Change the color scheme to use blue as the primary color"
+- "Add more visual elements and interactive components"
 
-### **Creative Agencies**
-```
-"Design a [type] agency website with case studies, service offerings, team showcase, creative process, and client work examples"
-```
+**Structure Changes:**
+- "Reorganize the services into tabs instead of cards"
+- "Convert the FAQ to an accordion format"
+- "Add a modal popup for the contact form"
 
-## 🚀 Best Practices
+### **Element-Specific Editing**
+1. Enable element selection mode
+2. Click any preview element
+3. Make targeted edits without affecting other content
+4. See precise changes highlighted in the editor
 
-1. **Start Broad, Then Refine**: Begin with a general request, then ask for specific modifications
-2. **Request Rich Content**: Ask for "detailed descriptions," "specific examples," and "comprehensive information"
-3. **Think About User Journey**: Consider what visitors want to find and how they'll navigate
-4. **Use Industry Terms**: Include relevant terminology for your field
-5. **Ask for Interactivity**: Request tabs, accordions, or other engaging elements
+## 🚀 Best Practices & Workflows
 
-## 🎯 Example Session
+### **Optimal Workflow**
 
-**Initial Prompt:**
-"Create a modern web design agency website with portfolio showcase, services, team, and contact"
+1. **Plan Your Structure**: Think about main sections and user journey
+2. **Choose Enhanced Mode**: For strategic, professional results
+3. **Write Comprehensive Prompts**: Include industry, sections, and interactive elements
+4. **Let Generation Complete**: Watch the three-layer system work
+5. **Review Generated Content**: Check interactive components and styling
+6. **Make Targeted Refinements**: Use follow-up prompts for specific improvements
+7. **Export Professional Results**: Choose appropriate format for your needs
 
-**Follow-up Refinements:**
-- "Add a case studies section with detailed project breakdowns"
-- "Make the portfolio section use tabs for different project types"
-- "Include client testimonials with specific results achieved"
-- "Add a blog section with recent articles about web design trends"
+### **Quality Guidelines**
 
-## 💫 What Makes DeepSite Special
+#### **For Best Results:**
+- Use industry-specific terminology
+- Request interactive components explicitly
+- Ask for substantial content (300-500 words per section)
+- Specify desired user experience elements
+- Mention responsive design requirements
 
-- **Instant Results**: Professional websites generated in seconds
-- **Comprehensive Features**: Not just basic pages, but fully interactive experiences
-- **Professional Quality**: Industry-standard design patterns and best practices
-- **Easy Iteration**: Simple conversational editing and refinement
-- **Production Ready**: Clean, optimized code that's ready to deploy
+#### **Content Excellence:**
+- Request detailed service descriptions
+- Ask for specific team member profiles
+- Include client testimonials with results
+- Provide comprehensive company information
+- Add relevant case studies or portfolio items
 
-Ready to create something amazing? Start with your idea and let DeepSite bring it to life! 🚀
+### **Common Use Cases**
+
+#### **Business Development**
+- Professional service websites
+- Company portfolio sites
+- Consulting firm presentations
+- Agency showcase platforms
+
+#### **Creative Professionals**
+- Photography portfolios
+- Design showcases
+- Artist galleries
+- Creative agency sites
+
+#### **E-commerce & Retail**
+- Product showcase sites
+- Online store interfaces
+- Brand presentation pages
+- Shopping experience demos
+
+#### **Technology & Innovation**
+- SaaS platform landing pages
+- Software company sites
+- Tech startup presentations
+- Product demonstration pages
+
+## 💫 What Makes DeepSite v2 Revolutionary
+
+### **Professional Quality**
+- Every website includes sophisticated design patterns
+- Interactive components in all generated sites
+- Production-ready code suitable for real deployment
+- Comprehensive style guidelines ensure consistency
+
+### **Intelligent Generation**
+- Three-layer system creates engaging experiences
+- Dynamic content loading for modern web feel
+- Strategic content planning with AI analysis
+- Pattern recognition for optimal layout selection
+
+### **Comprehensive Platform**
+- Complete documentation and training system
+- Professional development tools and interface
+- Multiple export formats for different needs
+- Advanced monitoring and analytics capabilities
+
+### **User-Focused Design**
+- Intuitive interface with comprehensive guidance
+- Educational approach with built-in examples
+- Training-focused documentation system
+- Progressive learning curve for all skill levels
+
+## 🎯 Success Examples
+
+### **From Simple Prompt to Professional Site**
+
+**Input:** "Create a modern consulting firm website"
+
+**AI Generates:**
+- Strategic content planning with comprehensive services
+- Interactive tabs for service categories
+- Team profiles with professional layouts
+- Client testimonials with specific results
+- Contact system with location and business information
+- Professional styling with consistent design language
+- Dynamic content loading for engaging experience
+
+**Result:** Production-ready website suitable for real business use
+
+---
+
+## 🚀 Ready to Create?
+
+DeepSite v2 transforms website creation from a technical challenge into a creative conversation between your ideas and AI implementation capabilities. 
+
+**Start with the interactive documentation, choose your generation mode, and watch your vision come to life with professional quality and comprehensive features!**
+
+Welcome to the future of website creation! ✨

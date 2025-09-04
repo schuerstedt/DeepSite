@@ -1,103 +1,296 @@
-# DeepSite - AI Website Generator Technical Documentation
+# DeepSite v2 - AI Website Generator Technical Documentation
 
 ## 🏗️ Architecture Overview
 
-DeepSite is a **Next.js-based AI website generator** that uses multiple LLM providers to generate and modify HTML/CSS/JS websites in real-time. It's essentially a smart code editor with AI capabilities that turns website creation into a conversational experience between human creativity and AI technical implementation.
+DeepSite v2 is a **Next.js 15.3.3-based AI website generator** that combines multiple AI providers with comprehensive design systems to create professional, interactive websites. The system features dynamic content generation, interactive component libraries, and intelligent content structure patterns.
+
+## 🧠 Core Concept: Three-Layer Generation System
+
+### Layer 1: System Prompts (Foundation)
+The system uses sophisticated prompts that define the generation behavior:
+
+**Enhanced Mode System Prompt** (`lib/prompts.ts`):
+- **Strategic Planning**: Purpose, content architecture, visual strategy, UX, technical requirements
+- **Design System Integration**: Comprehensive Tailwind CSS patterns and component guidelines
+- **Interactive Component Patterns**: Tab systems, accordions, modals, progressive loading
+- **Content Excellence**: 300-500 word sections with real value and engagement focus
+
+**Classic Mode System Prompt**:
+- Traditional single-stage generation with image integration
+- Content richness guidelines for substantial, meaningful content
+- Pollinations.ai image generation with detailed prompts
+
+### Layer 2: Dynamic Image Generation (Visual Content)
+**Pollinations.ai Integration** with intelligent prompt generation:
+
+```typescript
+// API Format
+https://image.pollinations.ai/prompt/{URL-encoded-prompt}?width={width}&height={height}&model=flux&enhance=true&seed=42
+
+// Enhanced Prompt Guidelines
+- 20-40 words focusing on visual elements, style, lighting, composition
+- No text/words in prompts (Flux limitation)
+- URL-encoded with proper dimensions
+- Professional context-aware descriptions
+```
+
+**Image Strategy**:
+- Strategic placement between content sections for visual breaks
+- Context-aware prompts based on website purpose and content
+- Consistent styling with Tailwind classes (`rounded-lg`, `shadow-md`)
+- Performance optimization with proper width/height attributes
+
+### Layer 3: Dynamic Text Generation (Content Snippets)
+**GenerateText.js System** for progressive content loading:
+
+```javascript
+// Usage Pattern
+<div data-generatetext="Create detailed testimonials with specific results" data-system="optional-system-prompt">Loading...</div>
+
+// Features
+- Auto-loading on page load (no user interaction required)
+- Consistent system prompts across entire page
+- 300-500 word substantial content per section
+- Integration with interactive components
+```
+
+**Content Generation Strategy**:
+- **Pattern Recognition**: Automatic layout selection (tabs, accordions, cards)
+- **Progressive Structure**: Hero → Content → Interactive → Visual → CTA
+- **Content Mixing**: generatetext + images + interactive elements
+- **Consistent Styling**: Unified design language across all generated content
 
 ## 🤖 AI/LLM Integration
 
-### Supported Providers
+### Supported Providers & Models
 
-The system supports multiple AI providers through the **Hugging Face Inference API** (`lib/providers.ts`):
+**Primary Providers** (`lib/providers.ts`):
 
-| Provider | Max Tokens | ID |
-|----------|------------|-----|
-| **Fireworks AI** | 131,000 | `fireworks-ai` |
-| **Nebius AI Studio** | 131,000 | `nebius` |
-| **SambaNova** | 32,000 | `sambanova` |
-| **NovitaAI** (Default) | 16,000 | `novita` |
-| **Hyperbolic** | 131,000 | `hyperbolic` |
-| **Together AI** | 128,000 | `together` |
-| **Groq** | 16,384 | `groq` |
+| Provider | Models | Max Tokens | Features |
+|----------|---------|------------|----------|
+| **DeepSeek** | V3-0324, R1-0528 | 131,000 | Primary generation, thinking models |
+| **Fireworks AI** | Qwen3-Coder-480B | 131,000 | Code generation specialist |
+| **Nebius AI** | Multiple models | 131,000 | High-performance generation |
+| **SambaNova** | Various models | 32,000 | Fast inference |
+| **Together AI** | Community models | 128,000 | Model variety |
+| **Groq** | Optimized models | 16,384 | Ultra-fast inference |
 
-### Supported Models
-
-- **DeepSeek V3 O324** (`deepseek-ai/DeepSeek-V3-0324`) - Primary model
-- **DeepSeek R1 0528** (`deepseek-ai/DeepSeek-R1-0528`) - Thinking model
-- **Qwen3 Coder 480B** (`Qwen/Qwen3-Coder-480B-A35B-Instruct`) 
-- **Kimi K2 Instruct** (`moonshotai/Kimi-K2-Instruct`)
+**Text Generation Models** (Pollinations.ai):
+- Dynamic model fetching from `https://text.pollinations.ai/models`
+- Model selection interface in settings
+- Cross-component synchronization via localStorage
+- Fallback to default models if API unavailable
 
 ### Two-Mode AI System
 
-#### Mode 1: Initial Generation (`POST /api/ask-ai`)
-- **Purpose**: Generates complete HTML files from scratch
-- **System Prompt**: `INITIAL_SYSTEM_PROMPT`
-- **Response Type**: Streaming response with real-time AI thinking
-- **Special Features**: Handles "thinking" models with `<think>` tags
+#### Mode 1: Enhanced Planning Mode
+- **Strategic Thinking**: Systematic planning before implementation
+- **Component Integration**: Automatic interactive element generation
+- **Content Strategy**: Intelligent content structure with generatetext integration
+- **Design System**: Consistent professional styling patterns
 
-#### Mode 2: Follow-up Editing (`PUT /api/ask-ai`)
-- **Purpose**: Smart diff-based editing of existing HTML
-- **System Prompt**: `FOLLOW_UP_SYSTEM_PROMPT`
-- **Response Type**: SEARCH/REPLACE blocks for precise modifications
-- **Special Features**: Element-specific targeting, context preservation
+#### Mode 2: Classic Mode  
+- **Direct Generation**: Traditional prompt-to-website conversion
+- **Image Integration**: Comprehensive pollinations.ai image generation
+- **Content Richness**: Substantial content creation guidelines
+- **Flexibility**: User-controlled generation approach
 
-## 🧠 Prompting System
+## 🎨 Style Guidelines System
 
-### Initial Generation Prompt
+### Comprehensive Design Patterns (`STYLE_GUIDELINES.md`)
 
-```typescript
-INITIAL_SYSTEM_PROMPT = `ONLY USE HTML, CSS AND JAVASCRIPT. 
-If you want to use ICON make sure to import the library first. 
-Try to create the best UI possible by using only HTML, CSS and JAVASCRIPT. 
-MAKE IT RESPONSIVE USING TAILWINDCSS. 
-Use as much as you can TailwindCSS for the CSS, if you can't do something with TailwindCSS, then use custom CSS 
-(make sure to import <script src="https://cdn.tailwindcss.com"></script> in the head). 
-Also, try to ellaborate as much as you can, to create something unique. 
-ALWAYS GIVE THE RESPONSE INTO A SINGLE HTML FILE. 
-AVOID CHINESE CHARACTERS IN THE CODE IF NOT ASKED BY THE USER.`
+**Layout Containers**:
+```css
+/* Page Structure */
+.page-container { @apply min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800; }
+.content-wrapper { @apply container mx-auto px-4 py-8 max-w-6xl; }
+.section-container { @apply mb-12 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-200/50 dark:border-slate-700/50 p-8 shadow-lg; }
 ```
 
-### Follow-up Editing System
-
-The follow-up system uses a **SEARCH/REPLACE block format**:
-
-```typescript
-FOLLOW_UP_SYSTEM_PROMPT = `You are an expert web developer modifying an existing HTML file.
-The user wants to apply changes based on their request.
-You MUST output ONLY the changes required using the following SEARCH/REPLACE block format.
-
-Format Rules:
-1. Start with <<<<<<< SEARCH
-2. Provide the exact lines from the current code that need to be replaced.
-3. Use ======= to separate the search block from the replacement.
-4. Provide the new lines that should replace the original lines.
-5. End with >>>>>>> REPLACE
-6. You can use multiple SEARCH/REPLACE blocks if changes are needed in different parts.
-7. The SEARCH block must exactly match the current code, including indentation and whitespace.
-
-Example:
-<<<<<<< SEARCH
-    <h1>Old Title</h1>
-=======
-    <h1>New Title</h1>
->>>>>>> REPLACE
-`
+**Typography System**:
+```css
+/* Heading Hierarchy */
+.heading-1 { @apply text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6; }
+.heading-2 { @apply text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-200 mb-4; }
+.body-text { @apply text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-4; }
 ```
 
-## 🔄 How the Editing Flow Works
+**Interactive Elements**:
+```css
+/* Button Patterns */
+.primary-button { @apply bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm hover:shadow-md; }
+.card-hover { @apply group hover:shadow-lg transition-all duration-300 hover:-translate-y-1; }
+```
 
-### 1. Element Selection Mode
+## 🔧 Interactive Component System
 
-Users can enable **"Edit Mode"** for targeted editing:
+### Component Library (`INTERACTIVE_COMPONENTS_GUIDE.md`)
 
-1. Click the crosshair button to enable edit mode
-2. Click on any element in the preview to select it
-3. Selected element's HTML is captured for targeted editing
-4. Chat interface switches to focus mode for that element
+**Available Components**:
+- **Tab Systems**: Multi-section content organization
+- **Accordion Sections**: Expandable FAQ and features
+- **Modal Dialogs**: Detailed content overlays
+- **Progressive Loading**: Staged content revelation
+- **Form Enhancements**: Real-time validation
+- **Tooltip System**: Contextual help
+- **Card Interactions**: Enhanced hover effects
 
-### 2. Intelligent Context Building
+**JavaScript Integration** (`public/interactive-features.js`):
+```javascript
+// Auto-initialization
+class InteractiveFeatures {
+  constructor() {
+    this.initializeTabs();
+    this.initializeAccordions();
+    this.initializeModals();
+    this.initializeProgressiveLoader();
+  }
+}
+```
 
-When making follow-up requests, the system builds rich context:
+**Usage in Generated Content**:
+```html
+<!-- Tab System -->
+<div class="w-full" data-component="tabs">
+  <div class="flex space-x-1 rounded-lg bg-slate-100 dark:bg-slate-800 p-1 mb-6" role="tablist">
+    <button role="tab" data-tab="overview">Overview</button>
+  </div>
+  <div data-tab-content="overview">
+    <div data-generatetext="Create comprehensive overview">Loading...</div>
+  </div>
+</div>
+```
+
+## 🔄 Content Generation Workflow
+
+### Intelligent Content Structure
+
+**Pattern Selection Logic**:
+1. **Content Analysis**: Determine optimal layout pattern (tabs, accordions, cards)
+2. **Component Generation**: Create interactive elements with generatetext integration
+3. **Visual Integration**: Strategic image placement for content breaks
+4. **Consistency Application**: Unified styling across all elements
+
+**Progressive Loading Strategy**:
+```javascript
+// GenerateText Integration
+1. Page loads with structured HTML + interactive components
+2. generatetext.js automatically processes data-generatetext attributes
+3. Content generates in background with loading states
+4. Progressive revelation with animations
+5. Final state: Fully interactive website with rich content
+```
+
+### Content Mixing Pattern
+
+**Optimal Structure**:
+```html
+<!-- Hero Section -->
+<section class="hero-with-background">
+  <!-- Initial content -->
+</section>
+
+<!-- Progressive Content -->
+<div data-generatetext="Introduction content">Loading...</div>
+<img src="pollinations-api-call" class="visual-break">
+<div data-generatetext="Feature details">Loading...</div>
+
+<!-- Interactive Component -->
+<div data-component="tabs">
+  <!-- Rich interactive content -->
+</div>
+```
+
+## 📡 API Architecture
+
+### Core Endpoints
+
+**Primary Generation** (`/api/ask-ai`):
+- **Method**: POST (initial) / PUT (follow-up)
+- **Features**: Streaming responses, provider selection, model switching
+- **Integration**: System prompt selection (enhanced/classic)
+
+**Text Generation Proxy** (Future - TODO):
+- **Endpoint**: `/api/proxy/pollinations/text/*`
+- **Purpose**: Rate limiting, authentication, model switching
+- **Benefits**: Centralized control, fallback mechanisms
+
+**Image Generation Proxy** (Future - TODO):
+- **Endpoint**: `/api/proxy/pollinations/image/*`
+- **Purpose**: Caching, rate limiting, alternative model support
+- **Benefits**: Performance optimization, cost control
+
+### Model Selection System
+
+**DeepSeek Models** (`hooks/useTextModel.ts`):
+- Settings panel integration
+- localStorage persistence
+- Cross-component synchronization
+
+**Text Generation Models**:
+- Dynamic fetching from pollinations.ai
+- Real-time model switching
+- Fallback to default models
+
+## 🎯 Advanced Features
+
+### User Documentation System
+
+**Comprehensive Start Page** (`lib/consts.ts` - defaultHTML):
+- Interactive documentation with expandable sections
+- Quick start examples organized by category
+- Copy-to-clipboard functionality for example prompts
+- Training-focused approach for user education
+
+**Documentation Suite**:
+- `STYLE_GUIDELINES.md`: Complete design system
+- `INTERACTIVE_COMPONENTS_GUIDE.md`: Component library reference
+- `USER_GUIDE.md`: Comprehensive user instructions
+- `IMPLEMENTATION_SUMMARY.md`: Technical implementation overview
+
+### Export & Download System
+
+**Enhanced Download Options** (`components/editor/download-generated-content.tsx`):
+- **HTML Export**: Complete websites with all features
+- **ZIP Downloads**: Packaged websites with assets
+- **Image Export**: High-quality screenshots
+- **PDF Generation**: Professional document output
+
+### Performance Optimization
+
+**Loading Strategies**:
+- Lazy image loading with intersection observer
+- Progressive content revelation
+- Smooth animations with optimized transitions
+- Client-side hydration protection
+
+**SSR Safety**:
+- Comprehensive client-side checks
+- Dynamic imports for browser-only features
+- Consistent state management
+- Layout stability patterns
+
+## � Future Architecture (Phase 2 TODO)
+
+### Inline Editing System
+- Three-icon control system for each content block
+- Direct HTML editing with validation
+- Regeneration with seed control
+- Prompt modification for specific elements
+
+### Local API Proxy
+- Rate limiting with authentication
+- Request/response logging
+- Easy model switching
+- Performance optimization with caching
+
+### Multi-LLM Architecture
+- Specialized LLMs for different tasks
+- Master LLM for architecture planning
+- Worker LLMs for content generation
+- Integration specialist for final polish
+
+This architecture creates a **comprehensive website generation platform** that combines AI intelligence with professional design systems, interactive components, and intelligent content structure for producing high-quality, engaging websites.
 
 ```typescript
 messages: [
@@ -356,111 +549,192 @@ The most sophisticated part of DeepSite is the **conversational follow-up editin
 - Scrolls to changed sections automatically
 - Shows diff decorations in Monaco Editor
 
-### 5. Intelligent Prompting
-- Builds rich context including:
-  - Previous prompts and responses
-  - Current HTML state
-  - Selected element information
-  - User preferences and settings
+## 🔧 Security & Performance Features
 
-## 📁 File Structure
+### Rate Limiting & Authentication
+- **IP-based Rate Limiting**: Anonymous users limited to 2 requests per IP
+- **User Authentication**: Cookie-based token system for unlimited access
+- **Fallback Token System**: Environment variables for development/production
+- **Provider Billing Tracking**: Separate billing for different token sources
+
+### Token Monitoring System
+- **Real-time Token Tracking**: Monitor usage across all providers (`hooks/useTokenTracking.ts`)
+- **Cost Estimation**: Track approximate costs for different model usage
+- **Usage Analytics**: Historical usage patterns and optimization recommendations
+- **Provider Comparison**: Compare costs and performance across providers
+
+### Content Security
+- **Input Sanitization**: Clean user prompts before AI processing
+- **Output Validation**: Validate generated HTML for security
+- **XSS Prevention**: Comprehensive sanitization of generated content
+- **CORS Protection**: Secure API endpoints with proper headers
+
+## 📁 Project Structure
 
 ```
 /app
   /api
-    /ask-ai/route.ts          # Main AI endpoint (POST & PUT)
-    /re-design/route.ts       # Website redesign from URLs
-    /auth/route.ts            # Authentication
-  /(public)/                  # Public pages
-  /projects/                  # Project management pages
+    /ask-ai/route.ts          # Main AI endpoint with dual mode support
+    /re-design/route.ts       # Website redesign from URL analysis
+    /auth/route.ts            # Authentication and session management
+    /me/route.ts              # User profile and settings
+  /(public)/                  # Public marketing pages
+  /projects/                  # Project management interface
+  /auth/                      # Authentication flow pages
 
 /components
-  /editor/
-    index.tsx                 # Main editor component
-    /ask-ai/
-      index.tsx              # AI chat interface
-      settings.tsx           # Provider/model settings
-      follow-up-tooltip.tsx  # Help for follow-up mode
-      selected-html-element.tsx # Element selection UI
-    /preview/index.tsx       # Live preview component
+  /editor/                    # Core editor interface
+    index.tsx                 # Main split-screen editor
+    /ask-ai/                  # AI interaction components
+      index.tsx              # Chat interface with streaming
+      settings.tsx           # Provider/model configuration
+      prompt-history.tsx     # Conversation history
+    /preview/                 # Live website preview
+    /download/                # Export system components
+    /header/                  # Editor toolbar
+    /footer/                  # Status and controls
+
+  /analytics-dashboard.tsx    # Usage analytics and monitoring
+  /contexts/                  # React context providers
+  /magic-ui/                  # Reusable UI components
+  /providers/                 # External service integrations
 
 /lib
-  prompts.ts                 # System prompts and constants
+  prompts.ts                 # System prompts (enhanced/classic modes)
   providers.ts               # AI provider configurations
-  api.ts                     # API utilities
-  auth.ts                    # Authentication utilities
+  custom-styles.ts           # Dynamic style system
+  design-styles.ts           # Comprehensive design patterns
+  token-monitoring.ts        # Usage tracking utilities
+  prompt-analytics.ts        # Conversation analytics
+  download-utils.ts          # Export system utilities
 
 /hooks
-  useEditor.ts               # Editor state management
-  useUser.ts                 # User state management
+  useEditor.ts               # Editor state and HTML management
+  useTokenTracking.ts        # Real-time usage monitoring
+  useUser.ts                 # Authentication and user data
+
+/types
+  index.ts                   # TypeScript definitions
+  declare.d.ts               # Global type declarations
+
+/public
+  /providers/                # Provider logos and assets
+  /interactive-features.js   # Client-side interactive components
 ```
 
-## 🚀 Getting Started
+## 🚀 Setup & Development
 
-### Environment Variables
+### Environment Configuration
 
 ```bash
-# Required for AI functionality
-HF_TOKEN=your_huggingface_token
-DEFAULT_HF_TOKEN=fallback_token
+# Core AI Functionality
+HF_TOKEN=your_primary_huggingface_token
+DEFAULT_HF_TOKEN=fallback_token_for_anonymous_users
 
-# Required for database
-MONGODB_URI=your_mongodb_connection_string
+# Database & Storage
+MONGODB_URI=mongodb_connection_string
 
-# Optional for authentication
-NEXTAUTH_SECRET=your_auth_secret
+# Authentication (Optional)
+NEXTAUTH_SECRET=secure_session_secret
+AUTH_PROVIDERS=github,google  # Supported OAuth providers
+
+# Development (Optional)
+NODE_ENV=development
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-### Running Locally
+### Quick Start
 
 ```bash
+# Install dependencies
 npm install
+
+# Set up environment
+cp .env.example .env.local
+# Edit .env.local with your tokens
+
+# Start development server
 npm run dev
+
+# Access the application
+open http://localhost:3000
 ```
 
-## 🔄 Development Workflow
+### Production Deployment
 
-1. **Frontend**: User types prompt in chat interface
-2. **Context Building**: System determines if initial generation or follow-up edit
-3. **API Call**: POST (initial) or PUT (follow-up) to `/api/ask-ai`
-4. **AI Processing**: Stream response from selected provider/model
-5. **Response Handling**: Parse and apply changes to HTML
-6. **UI Update**: Update editor, preview, and provide visual feedback
-7. **History**: Save to project history and user session
+```bash
+# Build optimized version
+npm run build
 
-## 🛡️ SSR & Hydration Protection
+# Start production server
+npm start
 
-DeepSite implements comprehensive SSR-safe patterns to prevent hydration mismatches:
+# Or deploy to Vercel/Netlify/Docker
+```
 
-### **Client-Side Protection Pattern**
+## 🔄 Enhanced Development Workflow
+
+### 1. **User Interaction**
+- User selects generation mode (Enhanced/Classic)
+- Configures provider/model preferences
+- Types natural language prompt
+
+### 2. **Intelligent Processing**
+- System analyzes prompt for optimal generation strategy
+- Selects appropriate system prompt and components
+- Builds context with conversation history
+
+### 3. **AI Generation**
+- Streams real-time response with thinking process
+- Generates structured HTML with interactive components
+- Integrates dynamic content generation markers
+
+### 4. **Progressive Enhancement**
+- Initial HTML loads with interactive framework
+- GenerateText.js processes dynamic content sections
+- Images load progressively with pollinizations.ai
+- Interactive components activate automatically
+
+### 5. **User Refinement**
+- Follow-up prompts for targeted editing
+- Element-specific modifications
+- Style and content adjustments
+- Export to multiple formats
+
+### 6. **Project Management**
+- Auto-save to MongoDB with version history
+- Share projects with other users
+- Export complete websites or components
+- Track usage and optimize performance
+
+## 🛡️ Advanced SSR & Performance
+
+### **Hydration Safety Patterns**
 ```typescript
-const [isClient, setIsClient] = useState(false);
+// Universal client-side protection
+const [mounted, setMounted] = useState(false);
+useEffect(() => setMounted(true), []);
+if (!mounted) return <LoadingSkeleton />;
 
-useEffect(() => {
-  setIsClient(true);
-}, []);
-
-// Usage throughout components
-if (!isClient) return null; // or fallback UI
+// Dynamic imports with error boundaries
+const LazyComponent = dynamic(() => import('./BrowserOnlyComponent'), {
+  ssr: false,
+  loading: () => <Skeleton />,
+  error: ({ error }) => <ErrorFallback error={error} />
+});
 ```
 
-### **Dynamic Imports for Browser-Only Libraries**
-```typescript
-// SSR-safe dynamic imports
-const html2canvas = (await import('html2canvas')).default;
-const jsPDF = (await import('jspdf')).jsPDF;
-```
+### **Performance Optimization**
+- **Code Splitting**: Dynamic imports for heavy components
+- **Image Optimization**: Next.js Image component with lazy loading
+- **Bundle Analysis**: Webpack bundle analyzer integration
+- **Caching Strategy**: Redis caching for API responses
+- **CDN Integration**: Static asset optimization
 
-### **Protected Browser APIs**
-- `window` object access wrapped in `isClient` checks
-- `Date.now()` fallbacks for server/client consistency  
-- localStorage operations with client-side validation
-- Custom styles loading with hydration protection
+### **Progressive Web App Features**
+- **Service Worker**: Offline functionality for generated websites
+- **Manifest**: Installable PWA with custom icons
+- **Caching**: Intelligent caching of generated content
+- **Push Notifications**: Update notifications for saved projects
 
-### **Layout Stability**
-- Initial state management prevents layout shifts
-- Responsive behavior consistent across SSR/client
-- Tab navigation state properly initialized
-- Preview component layout fixes for proper initial visibility
-
-This creates a **conversational website building experience** where users can iteratively refine websites through natural language instructions, similar to pair programming with an AI developer!
+This comprehensive architecture delivers a **professional-grade AI website generator** that combines cutting-edge AI capabilities with robust software engineering practices, creating websites that are both impressive and production-ready.
