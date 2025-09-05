@@ -124,11 +124,19 @@ export function AskAI({
     setOpenThink(false);
     setIsThinking(true);
 
-    // Enhance prompt with style information
+    // Enhance prompt with style information and concept breakdown
     const selectedStyleConfig = getStyleById(selectedStyle as string);
-    const enhancedPrompt = selectedStyleConfig && selectedStyleConfig.id !== 'default' 
+    const isComplexPrompt = prompt.length > 200 || prompt.toLowerCase().includes('explain') || 
+                           prompt.toLowerCase().includes('breakdown') || prompt.toLowerCase().includes('comprehensive');
+    
+    let enhancedPrompt = selectedStyleConfig && selectedStyleConfig.id !== 'default' 
       ? `${prompt}\n\nSTYLE REQUIREMENT: ${selectedStyleConfig.prompt}` 
       : prompt;
+    
+    // Add concept breakdown suggestion for complex educational/business content
+    if (isComplexPrompt && !redesignMarkdown) {
+      enhancedPrompt += `\n\nCONTENT STRATEGY: Consider breaking this into focused concepts with visual elements, examples, and structured sections for better readability.`;
+    }
 
     let contentResponse = "";
     let thinkResponse = "";

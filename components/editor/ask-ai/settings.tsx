@@ -301,6 +301,40 @@ export function Settings({
               </div>
             )}
             
+            {/* Enhanced Content Breakdown Toggle */}
+            {!isFollowUp && (
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-neutral-300 text-sm mb-1.5">
+                      Content Breakdown
+                    </p>
+                    <p className="text-xs text-neutral-400/70">
+                      Break complex content into digestible concepts with visuals
+                    </p>
+                  </div>
+                  <div className="flex gap-1 bg-neutral-800 rounded-md p-1">
+                    <button
+                      className={classNames(
+                        'px-3 py-1.5 text-xs rounded transition-all duration-200',
+                        'text-neutral-400 hover:text-neutral-300'
+                      )}
+                    >
+                      Standard
+                    </button>
+                    <button
+                      className={classNames(
+                        'px-3 py-1.5 text-xs rounded transition-all duration-200',
+                        'bg-purple-500 text-white'
+                      )}
+                    >
+                      Enhanced
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {isFollowUp && (
               <div className="bg-amber-500/10 border-amber-500/10 p-3 text-xs text-amber-500 border rounded-lg">
                 Note: You can&apos;t use a Thinker model for follow-up requests.

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data-Concept Modular Prompt System Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="generatetext.js"></script>
+    <style>
+        body { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .demo-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .concept-section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .concept-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .concept-section:nth-child(1) { border-left-color: #3b82f6; }
+        .concept-section:nth-child(2) { border-left-color: #10b981; }
+        .concept-section:nth-child(3) { border-left-color: #f59e0b; }
+        .concept-section:nth-child(4) { border-left-color: #ef4444; }
+        .concept-section:nth-child(5) { border-left-color: #8b5cf6; }
+        
+        .feature-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .attribute-demo {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+    <div class="demo-container w-full max-w-6xl p-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                🧠 Data-Concept Modular Prompt System
+            </h1>
+            <p class="text-lg text-gray-600 mb-6">
+                Master LLM creates coordinated content with shared context and granular control
+            </p>
+            
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <span class="feature-tag">data-concept Context</span>
+                <span class="feature-tag">Modular Prompts</span>
+                <span class="feature-tag">Smart Caching</span>
+                <span class="feature-tag">Attribute Control</span>
+                <span class="feature-tag">Style Integration</span>
+            </div>
+            
+            <!-- Style Selector -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <label class="text-gray-700 font-medium">Design Style:</label>
+                <select id="styleSelector" class="px-4 py-2 border rounded-lg bg-white shadow-sm">
+                    <option value="modern">Modern Clean</option>
+                    <option value="professional">Professional Corporate</option>
+                    <option value="creative">Creative Artistic</option>
+                    <option value="minimal">Minimal</option>
+                    <option value="colorful">Colorful Vibrant</option>
+                </select>
+                <button onclick="applyStyle()" class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all">
+                    Apply Style
+                </button>
+            </div>
+        </div>
+
+        <!-- Demo: Comprehensive Digital Marketing Guide -->
+        <div class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-center">
+                📈 Demo: Comprehensive Digital Marketing Guide
+            </h2>
+            <p class="text-gray-600 text-center mb-8">
+                Shows how data-concept coordinates multiple related sections
+            </p>
+            
+            <!-- Overview Section -->
+            <div class="concept-section p-6 mb-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">1</span>
+                    <h3 class="font-bold text-lg">Marketing Strategy Overview</h3>
+                    <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded">data-length="medium"</span>
+                </div>
+                
+                <div class="attribute-demo p-4 mb-4 text-xs">
+                    &lt;div data-concept="<span class="text-blue-600">Comprehensive digital marketing strategy guide</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-generatetext="<span class="text-green-600">Overview of digital marketing strategy fundamentals and importance for business growth</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-length="<span class="text-purple-600">medium</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-tone="<span class="text-orange-600">professional</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-audience="<span class="text-red-600">business owners</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-key="<span class="text-indigo-600">marketing.overview</span>"&gt;
+                </div>
+                
+                <div data-concept="Comprehensive digital marketing strategy guide"
+                     data-generatetext="Overview of digital marketing strategy fundamentals and importance for business growth"
+                     data-length="medium"
+                     data-tone="professional"
+                     data-audience="business owners"
+                     data-key="marketing.overview">
+                    Loading marketing overview...
+                </div>
+            </div>
+
+            <!-- Social Media Marketing -->
+            <div class="concept-section p-6 mb-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">2</span>
+                    <h3 class="font-bold text-lg">Social Media Marketing</h3>
+                    <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded">data-tone="engaging"</span>
+                </div>
+                
+                <div class="attribute-demo p-4 mb-4 text-xs">
+                    &lt;div data-concept="<span class="text-blue-600">Comprehensive digital marketing strategy guide</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-generatetext="<span class="text-green-600">Social media marketing tactics, platform selection, and content strategy</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-length="<span class="text-purple-600">medium</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-tone="<span class="text-orange-600">engaging</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-audience="<span class="text-red-600">business owners</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-key="<span class="text-indigo-600">marketing.social</span>"&gt;
+                </div>
+                
+                <div data-concept="Comprehensive digital marketing strategy guide"
+                     data-generatetext="Social media marketing tactics, platform selection, and content strategy"
+                     data-length="medium"
+                     data-tone="engaging"
+                     data-audience="business owners"
+                     data-key="marketing.social">
+                    Loading social media strategy...
+                </div>
+            </div>
+
+            <!-- SEO Strategy -->
+            <div class="concept-section p-6 mb-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-medium">3</span>
+                    <h3 class="font-bold text-lg">SEO & Content Strategy</h3>
+                    <span class="text-xs bg-yellow-100 text-yellow-600 px-2 py-1 rounded">data-length="long"</span>
+                </div>
+                
+                <div class="attribute-demo p-4 mb-4 text-xs">
+                    &lt;div data-concept="<span class="text-blue-600">Comprehensive digital marketing strategy guide</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-generatetext="<span class="text-green-600">SEO best practices, keyword research, and content marketing strategy</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-length="<span class="text-purple-600">long</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-tone="<span class="text-orange-600">professional</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-audience="<span class="text-red-600">business owners</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-key="<span class="text-indigo-600">marketing.seo</span>"&gt;
+                </div>
+                
+                <div data-concept="Comprehensive digital marketing strategy guide"
+                     data-generatetext="SEO best practices, keyword research, and content marketing strategy"
+                     data-length="long"
+                     data-tone="professional"
+                     data-audience="business owners"
+                     data-key="marketing.seo">
+                    Loading SEO strategy...
+                </div>
+            </div>
+
+            <!-- Email Marketing -->
+            <div class="concept-section p-6 mb-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">4</span>
+                    <h3 class="font-bold text-lg">Email Marketing Campaigns</h3>
+                    <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded">data-audience="SMEs"</span>
+                </div>
+                
+                <div class="attribute-demo p-4 mb-4 text-xs">
+                    &lt;div data-concept="<span class="text-blue-600">Comprehensive digital marketing strategy guide</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-generatetext="<span class="text-green-600">Email marketing automation, list building, and campaign optimization</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-length="<span class="text-purple-600">medium</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-tone="<span class="text-orange-600">practical</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-audience="<span class="text-red-600">SMEs</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-key="<span class="text-indigo-600">marketing.email</span>"&gt;
+                </div>
+                
+                <div data-concept="Comprehensive digital marketing strategy guide"
+                     data-generatetext="Email marketing automation, list building, and campaign optimization"
+                     data-length="medium"
+                     data-tone="practical"
+                     data-audience="SMEs"
+                     data-key="marketing.email">
+                    Loading email marketing strategy...
+                </div>
+            </div>
+
+            <!-- Analytics & ROI -->
+            <div class="concept-section p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">5</span>
+                    <h3 class="font-bold text-lg">Analytics & ROI Measurement</h3>
+                    <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">data-tone="analytical"</span>
+                </div>
+                
+                <div class="attribute-demo p-4 mb-4 text-xs">
+                    &lt;div data-concept="<span class="text-blue-600">Comprehensive digital marketing strategy guide</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-generatetext="<span class="text-green-600">Marketing analytics, KPI tracking, and ROI measurement strategies</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-length="<span class="text-purple-600">short</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-tone="<span class="text-orange-600">analytical</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-audience="<span class="text-red-600">business owners</span>"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data-key="<span class="text-indigo-600">marketing.analytics</span>"&gt;
+                </div>
+                
+                <div data-concept="Comprehensive digital marketing strategy guide"
+                     data-generatetext="Marketing analytics, KPI tracking, and ROI measurement strategies"
+                     data-length="short"
+                     data-tone="analytical"
+                     data-audience="business owners"
+                     data-key="marketing.analytics">
+                    Loading analytics strategy...
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-center mb-8">🚀 System Benefits</h3>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🧠</span>
+                    </div>
+                    <h4 class="font-bold mb-2">Context Preservation</h4>
+                    <p class="text-sm text-gray-600">data-concept ensures all sections work together as a cohesive guide</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h4 class="font-bold mb-2">Smart Caching</h4>
+                    <p class="text-sm text-gray-600">data-key enables intelligent content caching and reuse</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🎛️</span>
+                    </div>
+                    <h4 class="font-bold mb-2">Granular Control</h4>
+                    <p class="text-sm text-gray-600">Fine-tune length, tone, audience, and language per section</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Apply selected style
+        function applyStyle() {
+            const style = document.getElementById('styleSelector').value;
+            localStorage.setItem('designStyle', style);
+            
+            // Show feedback
+            const button = document.querySelector('button[onclick="applyStyle()"]');
+            const originalText = button.textContent;
+            button.textContent = `Applied: ${style}`;
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('bg-green-500');
+            }, 2000);
+            
+            console.log(`Applied design style: ${style}`);
+        }
+        
+        // Set default style
+        localStorage.setItem('designStyle', 'modern');
+        
+        // Log cache status
+        setInterval(() => {
+            if (typeof contentCache !== 'undefined') {
+                console.log(`Cache status: ${contentCache.size} items cached`);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

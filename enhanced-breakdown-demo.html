@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Style-Aware Snippet Breakdown Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .demo-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .generatetext-loading {
+            background: linear-gradient(90deg, #f0f2f5 25%, transparent 50%, #f0f2f5 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .feature-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .demo-section {
+            border-left: 4px solid;
+            transition: border-color 0.3s ease;
+        }
+        
+        .demo-section:nth-child(odd) { border-color: #3b82f6; }
+        .demo-section:nth-child(even) { border-color: #10b981; }
+        
+        @media (max-width: 768px) {
+            .demo-container { margin: 1rem; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+    <div class="demo-container w-full max-w-6xl p-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                🎨 Enhanced Style-Aware Snippet Breakdown
+            </h1>
+            <p class="text-lg text-gray-600 mb-6">
+                Master LLM breaks down complex prompts into structured, visually appealing content sections
+            </p>
+            
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <span class="feature-tag">Style Guide Integration</span>
+                <span class="feature-tag">Master LLM Control</span>
+                <span class="feature-tag">Visual Element Placement</span>
+                <span class="feature-tag">Context Preservation</span>
+            </div>
+            
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <select id="styleSelector" class="px-4 py-2 border rounded-lg bg-white shadow-sm">
+                    <option value="modern">Modern Design</option>
+                    <option value="minimal">Minimal Clean</option>
+                    <option value="colorful">Colorful Vibrant</option>
+                    <option value="professional">Professional</option>
+                    <option value="creative">Creative</option>
+                </select>
+                <button onclick="loadDemoContent()" class="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all">
+                    Generate Demo Content
+                </button>
+                <button onclick="clearDemo()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all">
+                    Clear
+                </button>
+            </div>
+        </div>
+
+        <!-- Demo Content Area -->
+        <div id="demoContent" class="space-y-8">
+            <!-- Sample breakdown will be loaded here -->
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="mt-16 p-6 bg-gray-50 rounded-xl">
+            <h3 class="text-xl font-bold mb-4">🚀 Try These Example Prompts:</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <button onclick="loadSpecificDemo('Explain comprehensive social media marketing strategies with examples')" 
+                            class="w-full text-left p-3 bg-white rounded-lg border hover:border-blue-300 transition-all">
+                        <div class="font-semibold text-blue-600">Social Media Marketing Guide</div>
+                        <div class="text-sm text-gray-500">Complex strategy breakdown</div>
+                    </button>
+                    
+                    <button onclick="loadSpecificDemo('Complete guide to sustainable living practices and how to implement them')" 
+                            class="w-full text-left p-3 bg-white rounded-lg border hover:border-green-300 transition-all">
+                        <div class="font-semibold text-green-600">Sustainable Living Guide</div>
+                        <div class="text-sm text-gray-500">Multi-part implementation guide</div>
+                    </button>
+                </div>
+                
+                <div class="space-y-2">
+                    <button onclick="loadSpecificDemo('Detailed explanation of blockchain technology with real-world applications and examples')" 
+                            class="w-full text-left p-3 bg-white rounded-lg border hover:border-purple-300 transition-all">
+                        <div class="font-semibold text-purple-600">Blockchain Technology</div>
+                        <div class="text-sm text-gray-500">Technical concept breakdown</div>
+                    </button>
+                    
+                    <button onclick="loadSpecificDemo('Step-by-step guide to starting an online business with marketing tactics and revenue strategies')" 
+                            class="w-full text-left p-3 bg-white rounded-lg border hover:border-orange-300 transition-all">
+                        <div class="font-semibold text-orange-600">Online Business Startup</div>
+                        <div class="text-sm text-gray-500">Comprehensive startup guide</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Showcase -->
+        <div class="mt-12 grid md:grid-cols-3 gap-6">
+            <div class="text-center p-6">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">🎨</span>
+                </div>
+                <h4 class="font-bold mb-2">Style Integration</h4>
+                <p class="text-sm text-gray-600">Master LLM creates style-specific naming conventions and applies them consistently</p>
+            </div>
+            
+            <div class="text-center p-6">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">🧠</span>
+                </div>
+                <h4 class="font-bold mb-2">Smart Breakdown</h4>
+                <p class="text-sm text-gray-600">Automatically detects complex content and structures it into digestible parts</p>
+            </div>
+            
+            <div class="text-center p-6">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">🖼️</span>
+                </div>
+                <h4 class="font-bold mb-2">Visual Elements</h4>
+                <p class="text-sm text-gray-600">Strategic placement of images, icons, and styling between content sections</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the enhanced generatetext.js -->
+    <script src="generatetext.js"></script>
+    
+    <script>
+        // Demo functionality
+        async function loadDemoContent() {
+            const style = document.getElementById('styleSelector').value;
+            const demoPrompt = "Comprehensive guide to effective time management techniques with examples and practical strategies for implementation";
+            
+            // Set the design style in localStorage for the demo
+            localStorage.setItem('designStyle', style);
+            
+            // Show loading state
+            document.getElementById('demoContent').innerHTML = `
+                <div class="text-center p-12">
+                    <div class="generatetext-loading w-32 h-4 rounded mx-auto mb-4"></div>
+                    <p class="text-gray-600">Master LLM is breaking down your content...</p>
+                </div>
+            `;
+            
+            // Simulate the breakdown process
+            try {
+                const brokenDownContent = await breakdownLargeSnippet(demoPrompt);
+                document.getElementById('demoContent').innerHTML = brokenDownContent;
+                
+                // Process any data-generatetext elements
+                setTimeout(() => {
+                    autoLoadContent();
+                }, 500);
+                
+            } catch (error) {
+                console.error('Demo failed:', error);
+                document.getElementById('demoContent').innerHTML = `
+                    <div class="text-center p-12">
+                        <div class="text-red-500 mb-4">❌ Demo failed to load</div>
+                        <p class="text-gray-600">Please try again or check the console for errors.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function loadSpecificDemo(prompt) {
+            const style = document.getElementById('styleSelector').value;
+            localStorage.setItem('designStyle', style);
+            
+            document.getElementById('demoContent').innerHTML = `
+                <div class="text-center p-12">
+                    <div class="generatetext-loading w-48 h-4 rounded mx-auto mb-4"></div>
+                    <p class="text-gray-600">Breaking down: "${prompt.substring(0, 50)}..."</p>
+                </div>
+            `;
+            
+            try {
+                const brokenDownContent = await breakdownLargeSnippet(prompt);
+                document.getElementById('demoContent').innerHTML = brokenDownContent;
+                
+                setTimeout(() => {
+                    autoLoadContent();
+                }, 500);
+                
+            } catch (error) {
+                console.error('Specific demo failed:', error);
+                document.getElementById('demoContent').innerHTML = `
+                    <div class="text-center p-12 text-red-500">
+                        Demo failed to load. Please try again.
+                    </div>
+                `;
+            }
+        }
+        
+        function clearDemo() {
+            document.getElementById('demoContent').innerHTML = `
+                <div class="text-center p-12 text-gray-500">
+                    Click "Generate Demo Content" or try one of the example prompts above
+                </div>
+            `;
+        }
+        
+        // Initialize with empty state
+        clearDemo();
+        
+        // Set initial style
+        localStorage.setItem('designStyle', 'modern');
+    </script>
+</body>
+</html>

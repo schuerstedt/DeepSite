@@ -4,6 +4,10 @@ export const REPLACE_END = ">>>>>>> REPLACE";
 
 export const MAX_REQUESTS_PER_IP = 2;
 
+// Enhanced imports for better style and content generation
+import { enhancePromptWithStyle } from './enhanced-style-guide';
+import { generateStructuredContent } from './snippet-concepts';
+
 // Default system prompt for consistent content generation
 export const DEFAULT_SYSTEM_PROMPT = `Return ONLY the inner HTML content without any wrapper containers. Use h2/h3 headings for sections, detailed paragraphs (p tags), bullet points (ul/li), and examples. Apply Tailwind CSS classes for professional styling: mb-4 for paragraph spacing, mb-6 for section spacing, text-gray-700 for content, font-semibold for emphasis. Do NOT include main, section, div, or container wrapper tags. Start directly with content elements like h2, p, ul, etc. Aim for 300-500 words with clear structure, specific examples, and actionable information.`;
 
@@ -22,6 +26,13 @@ export const INITIAL_SYSTEM_PROMPT = `ONLY USE HTML, CSS AND JAVASCRIPT. If you 
 - **Required Attributes**: ALWAYS include width and height attributes on img tags that match the API parameters
 - **Detailed Prompts**: Write detailed, descriptive image prompts (20-40 words) focusing on visual elements, style, lighting, composition, and mood
 - **Avoid Text**: Do NOT include any text, words, letters, or written content in image prompts as Flux has difficulty with text generation
+🖼️ IMAGE GENERATION:
+- **Image Support**: Use <img> tags with pollinations.ai API for dynamic image generation
+- **API Format**: https://image.pollinations.ai/prompt/{URL-encoded-prompt}?width={width}&height={height}&model=flux&enhance=true&seed=42
+- **Required Attributes**: ALWAYS include width and height attributes on img tags that match the API parameters
+- **Detailed Prompts**: Write detailed, descriptive image prompts (20-40 words) focusing on visual elements, style, lighting, composition, and mood
+- **Avoid Text**: Do NOT include any text, words, letters, or written content in image prompts as Flux has difficulty with text generation
+- **Style Integration**: Image prompts are automatically enhanced with selected style guidelines for visual consistency
 - **Example**: <img src="https://image.pollinations.ai/prompt/Professional%20business%20meeting%20scene%20with%20confident%20people%20in%20modern%20office%20setting%2C%20warm%20lighting%2C%20handshake%20gesture%2C%20corporate%20atmosphere%2C%20photorealistic%20style?width=800&height=400&model=flux&enhance=true&seed=42" width="800" height="400" alt="Professional business meeting" class="rounded-lg">
 - **Best Practices**: URL-encode prompts, use descriptive alt text, apply appropriate CSS classes for styling, focus on visual storytelling without text elements`;
 
@@ -110,6 +121,7 @@ export const getSystemPrompt = (mode: 'classic' | 'enhanced' = 'classic', sectio
 - **Required Pattern**: Mix generatetext + images + generatetext for rich layouts
 - **Creative Layout Patterns**: Use interactive UI patterns like tabs, accordions, collapsible sections, step-by-step flows, or card-based layouts instead of simple anchor links
 - **Rich Content Generation**: Create substantial, detailed content for each section using generatetext data attributes
+- **Enhanced Concept Breakdown**: For complex topics, use structured concept breakdown to create multiple focused sections
 - **Interactive Sections**: Implement engaging patterns like:
   * **Tab Systems**: Use JavaScript tab switching for different content areas
   * **Accordion/Collapsible**: Expandable sections with generatetext content inside
@@ -122,6 +134,27 @@ export const getSystemPrompt = (mode: 'classic' | 'enhanced' = 'classic', sectio
 - **Required Scripts**: ALWAYS include both scripts in HTML head:
   * \`<script src="/generatetext.js"></script>\` for dynamic content
   * \`<script src="/interactive-features.js"></script>\` for interactive elements
+
+🧠 **CONTENT GENERATION STRATEGY**:
+
+**For Complex Topics - Use data-concept Pattern:**
+Instead of one large data-generatetext, break into focused parts with shared context:
+
+❌ **Avoid**: <div data-generatetext="Explain comprehensive negotiation tactics with examples, preparation strategies, during-negotiation techniques, and follow-up procedures">
+
+✅ **Use**: 
+\`<div data-concept="Comprehensive negotiation tactics guide" data-generatetext="Preparation strategies for successful negotiations" data-length="medium" data-tone="professional">
+<div data-concept="Comprehensive negotiation tactics guide" data-generatetext="Key techniques during active negotiation" data-length="medium" data-tone="professional">
+<div data-concept="Comprehensive negotiation tactics guide" data-generatetext="Post-negotiation follow-up and relationship maintenance" data-length="short" data-tone="professional">\`
+
+**Available Attributes for Fine Control:**
+- **data-concept**: Overall topic/context (keeps related parts coordinated)
+- **data-generatetext**: Specific focused prompt
+- **data-length**: "short" | "medium" | "long"
+- **data-tone**: "professional" | "friendly" | "confident" | "casual" etc.
+- **data-audience**: "developers" | "executives" | "SMEs" | "students" etc.
+- **data-key**: Unique identifier for caching
+- **data-lang**: Language code (default: "en")
 
 🎨 **INTERACTIVE LAYOUT PATTERNS** (Choose based on content type):
 
@@ -338,3 +371,62 @@ Format Rules:
 7. To insert code, use an empty SEARCH block (only <<<<<<< SEARCH and ======= on their lines) if inserting at the very beginning, otherwise provide the line *before* the insertion point in the SEARCH block and include that line plus the new lines in the REPLACE block.
 8. To delete code, provide the lines to delete in the SEARCH block and leave the REPLACE block empty (only ======= and >>>>>>> REPLACE on their lines).
 9. IMPORTANT: The SEARCH block must *exactly* match the current code, including indentation and whitespace.`;
+
+/**
+ * Enhanced prompt generation with style integration and concept breakdown
+ */
+export const enhancePromptWithFeatures = async (
+  originalPrompt: string,
+  styleId: string = 'default',
+  useConceptBreakdown: boolean = false,
+  contentType: 'educational' | 'business' | 'technical' | 'creative' = 'educational'
+): Promise<string> => {
+  let enhancedPrompt = originalPrompt;
+
+  // Add style guidelines if not default
+  if (styleId !== 'default') {
+    try {
+      const { enhancePromptWithStyle } = await import('./enhanced-style-guide');
+      enhancedPrompt = await enhancePromptWithStyle(originalPrompt, styleId);
+    } catch (error) {
+      console.warn('Failed to enhance prompt with style:', error);
+    }
+  }
+
+  // Add concept breakdown for complex content
+  if (useConceptBreakdown) {
+    try {
+      const { generateStructuredContent } = await import('./snippet-concepts');
+      const structuredContent = await generateStructuredContent(originalPrompt, contentType, styleId);
+      enhancedPrompt += `\n\nSTRUCTURED CONTENT APPROACH:\nUse concept breakdown methodology with multiple focused sections, visual breaks, and progressive disclosure. Consider breaking complex topics into digestible concepts with supporting visuals.`;
+    } catch (error) {
+      console.warn('Failed to add concept breakdown:', error);
+    }
+  }
+
+  return enhancedPrompt;
+};
+
+/**
+ * Generate enhanced system prompt with style guidelines
+ */
+export const getEnhancedSystemPrompt = async (
+  mode: 'classic' | 'enhanced' = 'classic',
+  styleId: string = 'default',
+  sectionMode: boolean = true
+): Promise<string> => {
+  let systemPrompt = getSystemPrompt(mode, sectionMode);
+
+  // Add style-specific guidelines
+  if (styleId !== 'default') {
+    try {
+      const { generateStyleGuidePrompt } = await import('./enhanced-style-guide');
+      const styleGuidelines = await generateStyleGuidePrompt(styleId);
+      systemPrompt += `\n\nSTYLE REQUIREMENTS:\n${styleGuidelines}`;
+    } catch (error) {
+      console.warn('Failed to add style guidelines to system prompt:', error);
+    }
+  }
+
+  return systemPrompt;
+};
